@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+   <body>
+   
+   <p id="demo"></p>
+   
+      <form action="" method="">
+         Employee Name: <input type="text" name="empName" id="empName">
+         <br/>
+         Salary: <input type="text" name="empSalary" id="empSalary"/>
+          <br/>
+         <input type="button" value="subnit" onclick="callAJAXFunc();">
+         
+      </form>
+      
+      <script>
+      var ajaxRequest;
+      function callAJAXFunc() {
+    	  
+    	  ajaxRequest = new XMLHttpRequest();
+    	  
+    	  // Here processRequest() is the callback function.
+    	   ajaxRequest.onreadystatechange = processRequest;
+    	   
+    	   var url = "EmployeeAJAXServlet?empName=" + escape(document.getElementById("empName").value)
+    	  						 + "&empSalary=" + escape(document.getElementById("empSalary").value);
+    	   
+    	   ajaxRequest.open("POST", url, true);
+    	   ajaxRequest.send(null);
+      }
+      
+      function processRequest() {
+    	  
+    	  if(ajaxRequest.readyState==4) {  
+    		  
+    		  var val=ajaxRequest.responseText;  
+    		  
+    		  document.getElementById('demo').innerHTML=val;  
+    	  }  
+      }
+      </script>
+      
+   </body>
+</html>
